@@ -1,0 +1,51 @@
+.Button {
+    background-image: none;
+    transition-duration: 0.2s;
+}
+
+.Button:hover {
+    scale: 1.1 1.1;
+}
+
+.Button:active {
+    scale: 0.9 0.9;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.71);
+}
+
+.OptionsPanelHidden {
+    opacity: 1;
+    transform-origin: bottom;
+    transition-timing-function: linear;
+    transition-duration: 0.2s;
+    scale: 1 0;
+}
+
+.OptionsPanelActive {
+    scale: 1 1;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+}
+
+.SettingsPanelHidden {
+}
+
+.SettingsPanelActive {
+}
+
+.PanelActive {
+    transition-duration: 0.2s;
+    opacity: 1;
+    transform-origin: center;
+}
+
+.Header {
+    -unity-font-definition: url("project://database/Assets/Font/Coiny-Regular.ttf?fileID=12800000&guid=7528e36514facd349b2b86bfcfb9be04&type=3#Coiny-Regular");
+    font-size: 100px;
+}
+
+.PanelHidden {
+    opacity: 0;
+    scale: 0 0;
+    transition-duration: 0.2s;
+    transform-origin: center;
+}
