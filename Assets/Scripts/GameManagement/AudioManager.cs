@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Audio Clips")]
     [SerializeField] private AudioClip _musicClip;
+    [SerializeField] private AudioClip _jumpClip;
     [SerializeField] private AudioClip _clickedClip;
 
     void Awake()
@@ -37,6 +38,11 @@ public class AudioManager : MonoBehaviour
         _uiSfxSource.PlayOneShot(_clickedClip);
     }
 
+    public void JumpSound()
+    {
+        _sfxSource.PlayOneShot(_jumpClip);
+    }
+
     public void OnOffMusic()
     {
         if (_musicSource.volume != 0)
@@ -49,6 +55,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void OnOffSfx()
+    {
+        if (_sfxSource.volume != 0)
+        {
+            _sfxSource.volume = 0;
+        }
+        else
+        {
+            _sfxSource.volume = 1f;
+        }
+    }
+
     public void OnOffUISfx()
     {
         if (_uiSfxSource.volume != 0)
@@ -57,7 +75,7 @@ public class AudioManager : MonoBehaviour
         }
         else
         {
-            _uiSfxSource.volume = 0.8f;
+            _uiSfxSource.volume = 0.4f;
         }
     }
 }

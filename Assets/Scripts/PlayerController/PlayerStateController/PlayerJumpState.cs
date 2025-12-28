@@ -5,6 +5,7 @@ public class PlayerJumpState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         player.Rb.AddForce(Vector2.up * player.JumpForce, ForceMode2D.Impulse);
+        AudioManager.Instance.JumpSound();
     }
 
     public override void UpdateState(PlayerStateManager player)

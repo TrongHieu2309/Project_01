@@ -9,6 +9,7 @@ public class SpawnObstacles : MonoBehaviour
 
     public float _spawnCooldown;
     public float _spawnTimer;
+    private float _duration;
 
     void Start()
     {
@@ -35,11 +36,24 @@ public class SpawnObstacles : MonoBehaviour
         int index = Random.Range(0, _obstacles.Length - 1);
         Instantiate(_obstacles[index], transform.position, Quaternion.identity);
 
+        if (index == 5)
+        {
+            _duration = 0.9f;
+        }
+        else if (index == 3 || index == 4)
+        {
+            _duration = 0.46f;
+        }
+        else
+        {
+            _duration = 0.8f;
+        }
+
         indexBird = Random.Range(1, 3);
         if (indexBird == 2)
         {
             _spawnTimer = 0;
-            Instantiate(_obstacles[6], _birdPosition.position, Quaternion.identity);
+            StartCoroutine(nameof(SpawnBird));
         }
         else if (indexBird == 1)
         {
@@ -49,7 +63,7 @@ public class SpawnObstacles : MonoBehaviour
 
     IEnumerator SpawnBird()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(_duration);
         Instantiate(_obstacles[6], _birdPosition.position, Quaternion.identity);
     }
 

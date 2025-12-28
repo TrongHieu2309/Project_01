@@ -196,6 +196,7 @@ public class GameUI : MonoBehaviour
     private void OnClickSfx(ClickEvent evt)
     {
         AudioManager.Instance.ClickedSound();
+        AudioManager.Instance.OnOffSfx();
 
         if (_onOffSfxBtn.text == "OFF")
         {
