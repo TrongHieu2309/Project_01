@@ -5,8 +5,6 @@ using UnityEngine.UIElements;
 
 public class GameUI : MonoBehaviour
 {
-    public static GameUI Instance;
-
     private int _score;
     private float _scoreTimer;
 
@@ -77,6 +75,45 @@ public class GameUI : MonoBehaviour
         _settingsPanel.AddToClassList("PanelHidden");
         _pauseGamePanel.AddToClassList("PanelHidden");
         _gameOverPanel.AddToClassList("PanelHidden");
+
+        if (AudioManager.Instance.Music())
+        {
+            _onOffMusicBtn.text = "OFF";
+            _onOffMusicBtn.style.color = Color.white;
+            _onOffMusicBtn.style.unityBackgroundImageTintColor = new Color(0.518f, 0.518f, 0.518f, 1);
+        }
+        else
+        {
+            _onOffMusicBtn.text = "ON";
+            _onOffMusicBtn.style.color = Color.black;
+            _onOffMusicBtn.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 1);
+        }
+        
+        if (AudioManager.Instance.Sfx())
+        {
+            _onOffSfxBtn.text = "OFF";
+            _onOffSfxBtn.style.color = Color.white;
+            _onOffSfxBtn.style.unityBackgroundImageTintColor = new Color(0.518f, 0.518f, 0.518f, 1);
+        }
+        else
+        {
+            _onOffSfxBtn.text = "ON";
+            _onOffSfxBtn.style.color = Color.black;
+            _onOffSfxBtn.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 1);
+        }
+        
+        if (AudioManager.Instance.UISfx())
+        {
+            _onOffUISfxBtn.text = "OFF";
+            _onOffUISfxBtn.style.color = Color.white;
+            _onOffUISfxBtn.style.unityBackgroundImageTintColor = new Color(0.518f, 0.518f, 0.518f, 1);
+        }
+        else
+        {
+            _onOffUISfxBtn.text = "ON";
+            _onOffUISfxBtn.style.color = Color.black;
+            _onOffUISfxBtn.style.unityBackgroundImageTintColor = new Color(1, 1, 1, 1);
+        }
     }
 
     void Update()

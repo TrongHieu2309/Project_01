@@ -1,20 +1,31 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class SpawnObstacles : MonoBehaviour
 {
     [SerializeField] private GameObject[] _obstacles;
+    [SerializeField] private GameObject[] _fruits;
     [SerializeField] private Transform _birdPosition;
     public int indexBird;
+    public int indexFruit;
 
     public float _spawnCooldown;
     public float _spawnTimer;
-    private float _duration;
+
+    public float _spawnFruitTimer;
+    public float _spawnFruitCooldown;
+
+    private float _durationBird;
+    private float _durationFruit;
 
     void Start()
     {
         _spawnCooldown = Random.Range(3, 5);
         _spawnTimer = 0f;
+        _durationFruit = 0.5f;
+        _spawnFruitCooldown = 8f;
+        _spawnFruitTimer = 0f;
     }
 
     void Update()
@@ -28,6 +39,11 @@ public class SpawnObstacles : MonoBehaviour
                 SpawnObstacle();
                 _spawnCooldown = Random.Range(3, 5);
             }
+
+            if (_spawnFruitTimer <= _spawnFruitCooldown)
+            {
+                _spawnFruitTimer += Time.deltaTime;
+            }
         }
     }
 
@@ -38,15 +54,15 @@ public class SpawnObstacles : MonoBehaviour
 
         if (index == 5)
         {
-            _duration = 0.9f;
+            _durationBird = 1f;
         }
         else if (index == 3 || index == 4)
         {
-            _duration = 0.46f;
+            _durationBird = 0.48f;
         }
         else
         {
-            _duration = 0.8f;
+            _durationBird = 0.8f;
         }
 
         indexBird = Random.Range(1, 3);
@@ -59,12 +75,30 @@ public class SpawnObstacles : MonoBehaviour
         {
             _spawnTimer = 0;
         }
+
+        if (_spawnFruitTimer > _spawnFruitCooldown)
+        {
+            indexFruit = Random.Range(1, 4);
+        }
+
+        if (indexFruit == 3)
+        {
+            StartCoroutine(nameof(SpawnFruits));
+            _spawnFruitTimer = 0f;
+        }
     }
 
     IEnumerator SpawnBird()
     {
-        yield return new WaitForSeconds(_duration);
+        yield return new WaitForSeconds(_durationBird);
         Instantiate(_obstacles[6], _birdPosition.position, Quaternion.identity);
+    }
+    
+    IEnumerator SpawnFruits()
+    {
+        yield return new WaitForSeconds(_durationFruit);
+        Instantiate(_fruits[0], transform.position, Quaternion.identity);
+        indexFruit = 1;
     }
 
     public void SpawnCrate()

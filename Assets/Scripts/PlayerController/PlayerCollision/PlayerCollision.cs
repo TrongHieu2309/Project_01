@@ -9,4 +9,13 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.GameOver();
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Apple"))
+        {
+            Fruits.Instance.Collected();
+            PlayerAnimations.Instance.Immortal = true;
+        }
+    }
 }

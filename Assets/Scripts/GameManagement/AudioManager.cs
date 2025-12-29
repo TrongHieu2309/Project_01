@@ -16,15 +16,14 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
+        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -77,5 +76,32 @@ public class AudioManager : MonoBehaviour
         {
             _uiSfxSource.volume = 0.4f;
         }
+    }
+
+    public bool Music()
+    {
+        if (_musicSource.volume == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    public bool Sfx()
+    {
+        if (_sfxSource.volume == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public bool UISfx()
+    {
+        if (_uiSfxSource.volume == 0)
+        {
+            return false;
+        }
+        return true;
     }
 }
